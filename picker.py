@@ -15,7 +15,7 @@ _headers = {
     "Authorization": f"Token {apikey}",
     "Content-Type": "application/json"
     }
-min_score = 0 ## we'll edit this on the day to depending on how well people did probably be like 20 points or something
+min_score = int(config['min_score']) ## we'll edit this on the day to depending on how well people did probably be like 20 points or something
 
 def generate_random_winner_positions(participants, winner_count):
     winners = []
@@ -49,7 +49,7 @@ def getUsers():
 def main():
     participants = []
     raw_participants = ""
-    # with open("example.json","r") as f:
+    # with open("example.json","r") as f: # mock response
     #    raw_participants = json.loads(f.read())
 
     raw_participants = getScoreboard()
@@ -58,10 +58,10 @@ def main():
             participants.append(participant)
 
 
-    winners = generate_random_winner_positions(participants, 5)
+    winners = generate_random_winner_positions(participants, int(config['winners']))
     
     for w in winners:
-        print(f"id:[{participants[w-1]['account_id']}] - username:[{participants[w-1]['name']}] - you get a backpack!")
+        print(f"id:[{participants[w-1]['account_id']}] - username:[{participants[w-1]['name']}] - you get a {config['prize']}")
     
 
 
